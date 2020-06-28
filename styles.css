@@ -180,7 +180,7 @@ main p {
 }
 
 .middle input {
-    height: -webkit-fill-available;
+    height: 100%;
     border-radius: 5px;
     border: 0;
     padding: 5%;

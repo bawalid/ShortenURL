@@ -2,6 +2,8 @@ const input = $('#shortenURL');
 const submitBtn = $('#shorten');
 const error = $('#emptyMsg');
 
+let empty = true;
+
 
 
 let mobileMenuStatut = false;
@@ -50,15 +52,18 @@ function fetchURL() {
     const url = input.val();
     const urlFull = 'https://' + url;
     if (url === "") {
-        callError();
+        if (empty) {
+            callError();
+        }
+
     } else if (validURL(url)) {
         postData('https://rel.ink/api/links/', {
                 url: urlFull
             })
             .then(data => {
                 const shortURL = "https://rel.ink/" + data.hashid;
-                $('.bottom').prepend('<div class="short-section" id="section"><p class="original-url">'+urlFull+'</p><p class="short-section-url">'+shortURL+'</p><button id="btnCopy" class="active square" >copy</button></div>');
-                $("#btnCopy").on("click", function(){
+                $('.bottom').prepend('<div class="short-section" id="section"><p class="original-url">' + urlFull + '</p><p class="short-section-url">' + shortURL + '</p><button id="btnCopy" class="active square" >copy</button></div>');
+                $("#btnCopy").on("click", function () {
                     navigator.clipboard.writeText(shortURL); //Copy text to clipboard using chrome API
                     $("#btnCopy").addClass("copy");
                     $("#btnCopy").removeClass("active");
@@ -67,22 +72,25 @@ function fetchURL() {
             });
         input.removeClass("empty");
         $("#emptyMsg").remove();
-        
-         
-        
+        empty = true;
+
+
     } else {
         callError();
     }
 }
 
-function copyToClipboard(){
+function copyToClipboard() {
     copyURL.addClass("copied");
 }
 
 // Empty text Error
 function callError() {
-    input.addClass("empty");
-    input.after('<p id="emptyMsg">Please add a link</p>');
+    if (empty) {
+        input.addClass("empty");
+        input.after('<p id="emptyMsg">Please add a link</p>');
+        empty = false;
+    }
 }
 
 submitBtn.on("click", fetchURL);
