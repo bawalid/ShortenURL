@@ -50,12 +50,12 @@ async function postData(url = '', data = {}) {
 // Shorten URL
 function fetchURL() {
     const urlin = ""+input.val();
-    if (url === "") {
+    if (urlin === "") {
         if (empty) {
             callError();
         }
 
-    } else if (validURL(url)) {
+    } else if (validURL(urlin)) {
         postData('https://rel.ink/api/links/', {
                 url: urlin
             })
