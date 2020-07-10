@@ -49,7 +49,7 @@ async function postData(url = '', data = {}) {
 
 // Shorten URL
 function fetchURL() {
-    const urlin = input.val();
+    const urlin = ""+input.val();
     if (url === "") {
         if (empty) {
             callError();
