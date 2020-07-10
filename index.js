@@ -61,7 +61,7 @@ function fetchURL() {
             })
             .then(data => {
                 const shortURL = "https://rel.ink/" + data.hashid;
-                $('.bottom').prepend('<div class="short-section" id="section"><p class="original-url">' + urlFull + '</p><p class="short-section-url">' + shortURL + '</p><button id="btnCopy" class="active square" >copy</button></div>');
+                $('.bottom').prepend('<div class="short-section" id="section"><p class="original-url">' + urlin + '</p><p class="short-section-url">' + shortURL + '</p><button id="btnCopy" class="active square" >copy</button></div>');
                 $("#btnCopy").on("click", function () {
                     navigator.clipboard.writeText(shortURL); //Copy text to clipboard using chrome API
                     $("#btnCopy").addClass("copy");
