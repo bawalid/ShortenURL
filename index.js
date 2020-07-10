@@ -50,7 +50,6 @@ async function postData(url = '', data = {}) {
 // Shorten URL
 function fetchURL() {
     const url = input.val();
-    const urlFull = 'https://' + url;
     if (url === "") {
         if (empty) {
             callError();
@@ -58,7 +57,7 @@ function fetchURL() {
 
     } else if (validURL(url)) {
         postData('https://rel.ink/api/links/', {
-                url: urlFull
+                url: url
             })
             .then(data => {
                 const shortURL = "https://rel.ink/" + data.hashid;
